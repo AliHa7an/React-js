@@ -1,0 +1,117 @@
+body {
+  background: linear-gradient(to left, rgb(108, 159, 108), #3f3f3f);
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.form-box {
+  width: 380px;
+  background-color: black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.8;
+  border-radius: 3%;
+  text-align: center;
+  color: white;
+}
+
+.form-body {
+  width: 342px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  justify-content: space-between;
+  color: white;
+  text-align: center;
+}
+
+.button {
+  background-color: rgba(11, 76, 117, 0.9);
+  padding: 7px;
+  margin-top: 8px;
+  border-radius: 4px;
+  color: white;
+  border: 1px groove;
+  border-radius: 5px;
+}
+
+.focusText {
+  cursor: pointer;
+  color: wheat;
+  margin-top: 15px;
+  align-self: flex-end;
+  font-size: 12px;
+  padding: auto;
+}
+
+.form-control {
+  padding: 14px;
+  border-radius: 4px;
+  color: black;
+}
+
+.img {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-self: center;
+  animation: App-logo-spin infinite 20s linear;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button:hover {
+  color: rgb(14, 12, 12);
+  background-color: rgba(70, 175, 240, 0.9);
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+button[disabled]:hover {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.control-group {
+  display: flex;
+  column-gap: 1.4rem;
+  flex-wrap: wrap;
+  padding-bottom: 5px;
+}
+
+.for-border {
+  border-bottom-left-radius: 8px;
+}
+
+.error-message {
+  display: flex;
+  flex-direction: initial;
+  color: red;
+  font-size: 11px;
+}
+
+.success-message {
+  color: green;
+  font-size: 13px;
+}

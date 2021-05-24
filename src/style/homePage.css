@@ -1,0 +1,59 @@
+.homepage {
+  width: 90%;
+  height: 80%;
+  max-width: 43rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: white;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.btn {
+  align-self: center;
+  width: 25%;
+}
+
+.img-homepage {
+  height: 300px;
+  width: 300px;
+  align-self: center;
+  animation: App-logo-spin infinite 20s linear;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mymodal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border: 2px solid #ccc;
+  background: linear-gradient(to left, rgb(222, 228, 222), rgb(165, 181, 129));
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  box-shadow: burlywood;
+  color: rgb(0, 0, 0);
+}
+
+.myoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
