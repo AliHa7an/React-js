@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 import InputField from '../../components/inputField/InputFieldComponent'
 import { useForm } from "react-hook-form";
-import useHttp from "../../hooks/use-http"
 import Button from '../../components/buttonComponent/ButtonComponent';
 import { useSelector } from 'react-redux'
 import MESSAGES from '../../common/Message'
@@ -14,7 +13,6 @@ const EditProfile = () => {
     const textFocus = useRef();
     const userData = useSelector(state => state.user.userData)
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
-    //  const { error: httpRequestError, sendRequest } = useHttp()
     const [responseCode, setResponseCode] = useState()
 
     const dispatch = useDispatch();
@@ -32,18 +30,6 @@ const EditProfile = () => {
         }, []
     )
 
-    // const handleSubmitForm = useCallback(async data => {
-    //     const transformData = {
-    //         email: data?.email || userData?.email,
-    //         name: data?.userName || userData?.name,
-    //         status: data?.status,
-    //     }
-    //     sendRequest({
-    //         url: 'https://gorest.co.in/public-api/users/' + userData?.id,
-    //         method: 'PATCH',
-    //         body: transformData,
-    //     }, getResponse)
-    // }, [sendRequest, userData, getResponse])
 
     const handleSubmitForm = useCallback(async data => {
         setResponseCode(null)

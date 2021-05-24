@@ -10,7 +10,6 @@ export function* handleGetUser(action) {
         const data = response;
         yield put(setUser({ ...data }));
     } catch (error) {
-        console.log("me hn error")
         console.log(error);
     }
 }

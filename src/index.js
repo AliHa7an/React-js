@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-// import AuthControl from './components/auth/AuthControl'
 import { Provider } from 'react-redux'
 import { store, persistor } from './store/index'
 import { BrowserRouter } from 'react-router-dom'

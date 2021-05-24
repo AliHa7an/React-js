@@ -3,7 +3,6 @@ import InputField from '../../components/inputField/InputFieldComponent'
 import React, { useEffect, useRef, useCallback, useState } from 'react'
 import Button from '../../components/buttonComponent/ButtonComponent'
 import { useForm } from "react-hook-form";
-import useHttp from "../../hooks/use-http"
 import { useDispatch } from 'react-redux'
 import { authActions } from '../../store/auth'
 import { userDataActions } from '../../store/UserData'
@@ -16,13 +15,12 @@ import { requestActions } from '../../store/RequestErrors'
 
 const Login = (props) => {
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
-    //  const { error: httpRequestError, sendRequest } = useHttp()
     const [responseMessage, setResponseMessage] = useState()
     const dispatch = useDispatch();
     const history = useHistory()
 
     const httpRequestError = useSelector(state => state.requestErrors.errorMessage)
-    console.log("http   ", httpRequestError)
+
     const textInput = useRef();
 
     useEffect(() => {
@@ -52,22 +50,12 @@ const Login = (props) => {
 
 
 
-    // const handleSubmitForm = useCallback(async data => {
-    //     setResponseMessage('')
-    //     sendRequest({
-    //         url: 'https://gorest.co.in/public-api/users?email=' + data.email
-    //     }, getResponseMessage)
-    // }, [getResponseMessage, sendRequest])
 
 
     const handleSubmitForm = useCallback(async data => {
         setResponseMessage('')
         dispatch(requestActions.setErorrMessage(null))
         dispatch(sendRequest({ applyData: getResponseMessage, id: 34, url: 'https://gorest.co.in/public-api/users?email=' + data.email, Dispatch: dispatch }));
-
-        // sendRequest({
-        //     url: 'https://gorest.co.in/public-api/users?email=' + data.email
-        // }, getResponseMessage)
     }, [dispatch, getResponseMessage])
 
 

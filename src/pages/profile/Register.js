@@ -3,7 +3,6 @@ import InputField from '../../components/inputField/InputFieldComponent'
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import Button from '../../components/buttonComponent/ButtonComponent'
 import { useForm } from "react-hook-form";
-import useHttp from '../../hooks/use-http'
 import MESSAGES from '../../common/Message'
 import PATTERN from '../../common/PatternValidation'
 import { Link } from 'react-router-dom';
@@ -15,7 +14,6 @@ const Register = props => {
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
     const textInput = useRef();
     const [password, setPassword] = useState(null)
-    // const { error: httpRequestError, sendRequest } = useHttp()
     const [responseMessage, setResponseMessage] = useState()
     const dispatch = useDispatch();
     const httpRequestError = useSelector(state => state.requestErrors.errorMessage)
@@ -31,20 +29,6 @@ const Register = props => {
         else { setResponseMessage("Something went bad") }
     }
 
-
-    // const onSubmit = useCallback(async data => {
-    //     setResponseMessage('')
-    //     const transformData = {
-    //         name: data.userName,
-    //         email: data.email,
-    //         status: data.status,
-    //         gender: data.gender,
-    //     }
-    //     sendRequest({
-    //         url: 'https://gorest.co.in/public-api/users', method: 'POST',
-    //         body: transformData,
-    //     }, getResponseMessage)
-    // }, [sendRequest])
 
     const onSubmit = useCallback(async data => {
         setResponseMessage('')
