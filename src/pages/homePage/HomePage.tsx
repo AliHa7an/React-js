@@ -5,14 +5,16 @@ import '../../style/dialog.css'
 import CustomModal from '../../components/dialogBox/Dialog'
 import Button from '../../components/buttonComponent/ButtonComponent'
 import HomeScreen from './HomeScreen'
-import { authActions } from '../../store/auth'
-import { useDispatch } from 'react-redux'
+import { authActions } from '../../store/reducers/auth'
+import { useAppDispatch } from '../../store/store'
+import { useHistory } from 'react-router'
 
 
-const HomePage = (props) => {
-    const [isOpen, setDialog] = useState(false)
-    const dispatch = useDispatch()
-    const { history } = props
+const HomePage: React.FC = props => {
+    const [isOpen, setDialog] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
+//    const { history } = props
+    const history = useHistory()
 
 
     const handleCloseChange = useCallback(

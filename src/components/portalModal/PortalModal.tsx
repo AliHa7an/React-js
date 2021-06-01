@@ -2,13 +2,14 @@ import { useEffect } from 'react'
 import ReactDOM from 'react-dom';
 
 const modalRoot = document.getElementById('root-dialog');
-const PortalModal = props => {
+const PortalModal: React.FC = props => {
     const el = document.createElement('div');
 
     useEffect(() => {
-        modalRoot.appendChild(el)
+        
+        modalRoot?.appendChild(el)
         return () => {
-            modalRoot.removeChild(el)
+            modalRoot?.removeChild(el)
         }
     }, [el])
 

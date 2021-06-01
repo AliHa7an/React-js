@@ -1,12 +1,11 @@
 import React from 'react'
 import '../../style/login.css'
 
-const Button = props => {
+const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = props => {
     const { className } = props
     const buttonClass = className || "button"
-
     return (
-        <button className={buttonClass} {...props} />
+        <button {...props}  className={buttonClass} />
     )
 }
 

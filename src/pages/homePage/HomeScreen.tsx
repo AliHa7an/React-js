@@ -1,10 +1,14 @@
 import React from 'react'
 import logo from '../../logo.svg'
 import '../../style/homePage.css'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../store/store'
 
-const HomeScreen = props => {
-    const userData = useSelector(state => state.user.userData)
+interface IHomeScreenProps {
+    children: React.ReactNode
+}
+
+const HomeScreen: React.FC<IHomeScreenProps> = props => {
+    const userData = useAppSelector(state => state.user.userData)
 
     return (
         <div className="homepage">
@@ -16,4 +20,4 @@ const HomeScreen = props => {
     )
 }
 
-export default React.memo(HomeScreen)
+export default React.memo<IHomeScreenProps>(HomeScreen)

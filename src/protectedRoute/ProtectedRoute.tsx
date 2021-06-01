@@ -1,13 +1,21 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { Route, Redirect, RouteProps } from "react-router-dom";
+import { useAppSelector } from "../store/store";
 
-export const ProtectedRoute = ({
-    component: Component,
+export type ProtectedRouteProps = {
+    component: React.ComponentType<RouteProps>;
+  } & RouteProps;
+  
+
+
+export const ProtectedRoute: React.FC<ProtectedRouteProps>= ({
+    component: Component ,
     ...rest
+}: {
+  component: React.ComponentType<RouteProps>;
 }) => {
 
-    const isAuth = useSelector((state) => state.auth.isAuthenticated)
+    const isAuth = useAppSelector((state) => state.auth.isAuthenticated)
 
     return (
         <Route

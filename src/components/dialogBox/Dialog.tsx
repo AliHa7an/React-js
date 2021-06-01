@@ -3,10 +3,11 @@ import Modal from "react-modal";
 import '../../style/homePage.css'
 import React from 'react'
 
-const CustomModal = props => {
+const CustomModal : React.FC<{ isOpen:boolean, onClose:() => void }> = props  => {
 
     const { isOpen, onClose } = props
     const modalRoot = document.getElementById('root-dialog')
+    if(modalRoot)
     Modal.setAppElement(modalRoot)
     return (
         <Modal isOpen={isOpen}
@@ -19,7 +20,10 @@ const CustomModal = props => {
     )
 }
 
-export default React.memo(CustomModal)
+export default CustomModal
 
+
+
+    
 
 

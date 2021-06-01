@@ -6,39 +6,34 @@ import { useForm } from "react-hook-form";
 import MESSAGES from '../../common/Message'
 import PATTERN from '../../common/PatternValidation'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { sendRequest } from '../../store/UserSlice'
-import { useSelector } from 'react-redux'
+import { handleErrorsActions } from '../../store/reducers/handleErrors'
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { sagaActions } from '../../store/reduxSaga/actions/sagaActions';
 
-const Register = props => {
+const Register : React.FC= () => {
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: 'onChange' });
-    const textInput = useRef();
-    const [password, setPassword] = useState(null)
-    const [responseMessage, setResponseMessage] = useState()
-    const dispatch = useDispatch();
-    const httpRequestError = useSelector(state => state.requestErrors.errorMessage)
+    const textInput = useRef<HTMLInputElement>(null);
+    const [password, setPassword] = useState<string>('')
+    const dispatch = useAppDispatch();
+    const requestMessages = useAppSelector(state => state.handleErrors)
 
     useEffect(() => {
         textInput.current?.focus();
-    }, [])
+        dispatch(handleErrorsActions.setResponseMessage(null))
+        dispatch(handleErrorsActions.setErorrMessage(null))
+    }, [dispatch])
 
-    const getResponseMessage = data => {
-        const code = data?.code
-        if (code === 201 || code === 200) { setResponseMessage("201") }
-        else if (code === 422) { setResponseMessage("Data validation Failed") }
-        else { setResponseMessage("Something went bad") }
-    }
+
 
 
     const onSubmit = useCallback(async data => {
-        setResponseMessage('')
-        const transformData = {
+        const registerDetails = {
             name: data.userName,
             email: data.email,
             status: data.status,
             gender: data.gender,
         }
-        dispatch(sendRequest({ applyData: getResponseMessage, id: 34, url: 'https://gorest.co.in/public-api/users', method: 'POST', body: transformData, Dispatch: dispatch }));
+        dispatch({ type:sagaActions.REGISTER_REQUEST ,payload: registerDetails});
     }, [dispatch])
 
 
@@ -54,7 +49,7 @@ const Register = props => {
                 <InputField type="email" placeholder='email' icon="envelope" {...register("email", { pattern: { value: PATTERN.emailPattern, message: MESSAGES.emailValid }, required: MESSAGES.emailReq })} />
                 {errors.email?.message && <p className="error-message">{errors.email.message}</p>}
 
-                <InputField placeholder='password' type="password" icon="key" {...register("password", { pattern: { value: PATTERN.passwordPattern, message: MESSAGES.passwordValid }, required: MESSAGES.passwordReq, minLength: { value: 6, message: MESSAGES.passwordLength } })} onBlur={e => setPassword(e.target.value)} />
+                <InputField placeholder='password' type="password" icon="key" {...register("password", { pattern: { value: PATTERN.passwordPattern, message: MESSAGES.passwordValid }, required: MESSAGES.passwordReq, minLength: { value: 6, message: MESSAGES.passwordLength } })} onBlur={(e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
                 {errors.password?.message && <p className="error-message">{errors.password.message}</p>}
 
                 <InputField placeholder='confirmPassword' type="password" icon="key" {...register("confirmPassword", { pattern: { value: PATTERN.passwordPattern, message: MESSAGES.passwordValid }, required: "Please enter confirm password", minLength: { value: 6, message: MESSAGES.passwordLength }, validate: value => value === password })} />
@@ -72,8 +67,8 @@ const Register = props => {
                         <option value="Active">Active</option>
                     </select>
                 </div>
-                {httpRequestError && <p className="error-message">Failed to send the request</p>}
-                {responseMessage && responseMessage === "201" ? <p className="success-message">Registered successfully</p> : <p className="error-message">{responseMessage}</p>}
+                {requestMessages.errorMessage && <p className="error-message">Failed to send the request</p>}
+                {requestMessages.responseMessage && requestMessages.responseMessage === "201" ? <p className="success-message">Registered successfully</p> : <p className="error-message">{requestMessages.responseMessage}</p>}
 
                 <Button type="submit" disabled={!isValid}>Register</Button>
                 <Link to="/login" className="focusText"> <p>Login here</p> </Link>
